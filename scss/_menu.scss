@@ -1,0 +1,149 @@
+//Menu Button
+
+.menu-btn {
+    position: absolute;
+    z-index: 3;
+    right: 45px;
+    top: 35px;
+    cursor: pointer;
+    @include easeOut;
+
+    .btn-line {
+        width: 100px;
+        height: 5px;
+        margin: 0 0 15px 0;
+        background: #fff;
+        @include easeOut;
+    }
+
+    //Rotate Inro X with Menu Lines
+    &.close {
+        transform: rotate(180deg);
+
+        .btn-line {
+            //Line 1 - Rotate
+            &:nth-child(1) {
+                transform: rotate(45deg) translate(20px, 20px);
+            }
+
+            //Line 2 - Hide
+            &:nth-child(2) {
+                opacity: 0;
+            }
+
+            //Line 3 - Rotate
+            &:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+        }
+    }
+}
+
+//Menu Overlay
+.menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity: 1;
+    visibility: hidden;
+    z-index: 2;
+
+    &.show {
+        visibility: visible;
+    }
+
+    &-branding, &-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        width: 50%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &-nav {
+        margin: 0;
+        padding: 0;
+        background: rgba($primary-color,.8);
+        list-style:none;
+        transform: translate3d(0px, -100%, 0px);
+        @include easeOut;
+
+        &.show {
+            //Slide in from top
+            transform: translate3d(0,0,0);
+        }
+    }
+
+    //Branding Side
+    &-branding {
+        background: rgba($primary-color,.6);
+        transform: translate3d(0px, 100%, 0px);
+        @include easeOut;
+
+        &.show {
+            //Slide in from bottom
+            transform: translate3d(0,0,0);
+        }
+        .portrait {
+            width: 200px;
+            height: 200px;
+            background: url('../img/portrait.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            border: solid 3px $secondary-color;
+            opacity: 1;
+        }
+    }
+
+    .nav-item {
+        transform: translate3d(600px,0,0);
+        @include easeOut;
+
+        &.show {
+            //Slide in from right
+            transform: translate3d(0,0,0);
+        }
+
+        &.current > a {
+            color: $secondary-color;
+        }
+    }
+
+    .nav-link {
+        display: inline-block;
+        position: relative;
+        font-size: 46px;
+        text-transform: uppercase;
+        padding: 1rem 0;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        @include easeOut;
+
+        &:hover {
+            color: $secondary-color;
+        }
+    }
+}
+
+// Delay each nav item slide by 0.1s
+@for $x from 1 through 4 {
+    .nav-item:nth-child(#{$x}){
+        transition-delay: $x * 0.1s;
+    }
+}
+
+.bio-image {
+    width: 200px;
+    height: 200px;
+    background: url('../img/portrait.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: solid 3px $secondary-color;
+    opacity: 1;
+}
